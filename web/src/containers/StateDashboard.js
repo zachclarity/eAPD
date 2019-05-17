@@ -41,7 +41,7 @@ const StateDashboard = (
   return (
     <div className="ds-l-container ds-u-margin-top--7">
       <div className="ds-l-row">
-        <div className="ds-l-col--8 ds-u-margin-x--auto ">
+        <div className="ds-l-col--12 ds-l-md-col--8 ds-u-margin-x--auto ">
           <h1 className="ds-h1">
             {t('stateDashboard.title', { state: state.name })}
           </h1>
@@ -67,7 +67,7 @@ const StateDashboard = (
             key={apd.id}
             className="ds-l-row"
           >
-            <div className="ds-l-col--8 ds-u-margin-x--auto ds-u-padding-top--2">
+            <div className="ds-l-col--12 ds-l-md-col--8 ds-u-margin-x--auto ds-u-padding-top--2">
               <div className="ds-u-border-bottom--2 ds-u-padding-bottom--3">
                 <div
                   className="ds-u-display--inline-block ds-u-float--left ds-u-fill--primary-alt-lightest ds-u-padding--2 ds-u-margin-right--2"
