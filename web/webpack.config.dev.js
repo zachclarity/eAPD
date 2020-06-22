@@ -81,6 +81,9 @@ const config = {
     host: '0.0.0.0',
     hot: true,
     port: '8001'
+  },
+  resolve: {
+    modules: [path.resolve(__dirname, 'src'), 'node_modules']
   }
 };
 
