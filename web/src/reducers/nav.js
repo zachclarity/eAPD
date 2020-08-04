@@ -7,6 +7,7 @@ import { t } from '../i18n';
 export const links = [
   {
     label: t('apd.stateProfile.title'),
+    defaultCollapsed: true,
     items: [
       {
         id: 'apd-state-profile-nav',
@@ -207,6 +208,25 @@ export const getSelectedId = (location) => {
   return result;
 }
 
+const expandToSelectedId = (links, selectedId, parents = []) => {
+  let result = JSON.parse(JSON.stringify(links));
+  result.forEach(link => {
+    // base case
+    link.selected = link.id === selectedId;
+    if (link.selected && parents.length) {
+      parents.forEach(parent => {
+        parent.defaultCollapsed = false;
+        parent.selected = true;
+      });
+    }
+    // recursive case
+    if (link.items && link.items.length) {
+      expandToSelectedId(link.items, selectedId, [...parents, link]);
+    }
+  });
+  return result;
+}
+
 const initialState = {
   activities: [],
   links,
@@ -232,6 +252,7 @@ const reducer = (state = initialState, action = {}) => {
     case LOCATION_CHANGE: {
       const { location } = action.payload;
       const selectedId = getSelectedId(location);
+      const links = expandToSelectedId(state.links, selectedId);
 
       const {
         continueLink,
@@ -241,6 +262,7 @@ const reducer = (state = initialState, action = {}) => {
       return {
         ...state,
         continueLink,
+        links,
         previousLink,
         selectedId
       };
